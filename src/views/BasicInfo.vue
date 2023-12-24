@@ -5,7 +5,9 @@
     <explanatory-note-number></explanatory-note-number>
     <explanatory-note-year></explanatory-note-year>
     <explanatory-note-modifications></explanatory-note-modifications>
+
   </form>
+  <button @click=getNote>Submit</button>
 
 </template>
 
@@ -18,23 +20,30 @@ import AccessRestriction from "@/components/AccessRestriction.vue";
 import ExplanatoryNoteNumber from "@/components/ExplanatoryNoteNumber.vue";
 import ExplanatoryNoteYear from "@/components/ExplanatoryNoteYear.vue";
 import ExplanatoryNoteModifications from "@/components/ExplanatoryNoteModifications.vue";
-import HttpService from "@/services/HttpService.js";
+import axios from "axios";
 import UserService from "@/services/UserService.js";
 
 export default {
   name: "BasicInfo",
+  data() {
+    return {}
+
+  },
   components: {
     ExplanatoryNoteModifications,
     ExplanatoryNoteYear,
     ExplanatoryNoteNumber, AccessRestriction, TGUID, SchemaLink, SchemaVersion, AppHeader
   },
   methods: {
-    // sendForm: function ()
-  },
-  mounted() {
-    HttpService.getAxiosClient();
-    console.log(UserService.getToken())
-
+    getNote() {
+      console.log('submit')
+      axios.get('http://localhost:8888/explanatory-notes', {
+        headers: {
+          accept: 'application/json',
+          authorization: `Bearer ${UserService.getToken()}`
+        }
+      }).then((res) => console.log(res));
+    }
   }
 }
 </script>

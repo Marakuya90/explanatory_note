@@ -23,9 +23,8 @@ const configure = () => {
     });
 };
 
-export const getNote = _axios.get(
-    'explanatory-notes')
-    .then((response) => response.data)
+// export const getNote = axios.get('explanatory-notes')
+//     .then((response) => response.data)
 
 const getAxiosClient = () => _axios();
 
@@ -33,7 +32,7 @@ const HttpService = {
     HttpMethods,
     getAxiosClient,
     configure,
-    getNote
+    // getNote
 }
 
 export default HttpService;
